@@ -7,33 +7,35 @@ export const newSano = async () => {
   try {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto(WEATHER_URL);
 
-    // await sleep(5000);
+    await page.goto(WEATHER_URL, { waitUntil: 'networkidle2' });
 
-    // await page.goto(WEATHER_URL, { waitUntil: 'networkidle2' });
-
-    await page.goto(
-      'https://www.jma.go.jp/bosai/forecast/#area_type=class20s&area_code=0120200',
-      { waitUntil: 'networkidle2' }
-    );
-
-    // const huga = await page.evaluate(
-    //   'document.querySelector("#amd-table > div > div:nth-child(2) > div > div.contents-wide-table-scroll > table > tr:nth-child(4) > td.td-temp")'
-    // );
-
-    const head = await page.evaluate(() => {
-      return document.getElementsByTagName('head');
+    const date = await page.evaluate(() => {
+      return document.querySelector(
+        '#amd-table > div > div:nth-child(2) > div > div.contents-wide-table-scroll > table > tr:nth-child(4) > td:nth-child(1)'
+      ).innerHTML;
     });
 
-    console.log(head);
+    const temp = await page.evaluate(() => {
+      return document.querySelector(
+        '#amd-table > div > div:nth-child(2) > div > div.contents-wide-table-scroll > table > tr:nth-child(4) > td.td-temp'
+      ).innerHTML;
+    });
+
+    const rain = await page.evaluate(() => {
+      return document.querySelector(
+        '#amd-table > div > div:nth-child(2) > div > div.contents-wide-table-scroll > table > tr:nth-child(4) > td.td-precipitation1h'
+      ).innerHTML;
+    });
+
+    console.log('--------------');
+    console.log('時間:', date);
+    console.log('気温:', temp);
+    console.log('降水量:', rain);
+    console.log('--------------');
 
     await browser.close();
   } catch (e) {
     console.log(e);
   }
-};
-
-const sleep = (ms: number) => {
-  new Promise((resolve) => setTimeout(resolve, ms));
 };
