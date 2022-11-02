@@ -16,6 +16,12 @@ export const newSano = async () => {
       ).innerHTML;
     });
 
+    const time = await page.evaluate(() => {
+      return document.querySelector(
+        '#amd-table > div > div:nth-child(2) > div > div.contents-wide-table-scroll > table > tr:nth-child(4) > td:nth-child(2)'
+      ).innerHTML;
+    });
+
     const temp = await page.evaluate(() => {
       return document.querySelector(
         '#amd-table > div > div:nth-child(2) > div > div.contents-wide-table-scroll > table > tr:nth-child(4) > td.td-temp'
@@ -29,7 +35,8 @@ export const newSano = async () => {
     });
 
     console.log('--------------');
-    console.log('時間:', date);
+    console.log('日付:', date);
+    console.log('時間:', time);
     console.log('気温:', temp);
     console.log('降水量:', rain);
     console.log('--------------');
