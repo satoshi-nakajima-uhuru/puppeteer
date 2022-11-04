@@ -34,12 +34,18 @@ export const newSano = async () => {
       ).innerHTML;
     });
 
-    console.log('--------------');
+    const date02 = await page.evaluate(
+      'document.querySelector("#amd-table > div > div:nth-child(2) > div > div.contents-wide-table-scroll > table > tr:nth-child(4) > td:nth-child(1)").innerText'
+    );
+
+    console.log('----- 01 -----');
     console.log('日付:', date);
     console.log('時間:', time);
     console.log('気温:', temp);
     console.log('降水量:', rain);
-    console.log('--------------');
+
+    console.log('----- 02 -----');
+    console.log('日付：', date02);
 
     await browser.close();
   } catch (e) {
