@@ -7,23 +7,39 @@ export const newSano02 = async () => {
   try {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-
     await page.goto(WEATHER_URL, { waitUntil: 'networkidle2' });
 
-    const date02 = await page.evaluate(
+    const sano = await page.evaluate(
+      'document.querySelector("#amd-area-button > ul > li:nth-child(3)").innerText'
+    );
+
+    const date = await page.evaluate(
       'document.querySelector("#amd-table > div > div:nth-child(2) > div > div.contents-wide-table-scroll > table > tr:nth-child(4) > td:nth-child(1)").innerText'
     );
-    const sano = await page.evaluate(
-      'document.querySelector("#amd-controller > table > tr.contents-title > th > div > div.amd-content-amdname").innerText'
+
+    const time = await page.evaluate(
+      'document.querySelector("#amd-table > div > div:nth-child(2) > div > div.contents-wide-table-scroll > table > tr:nth-child(4) > td:nth-child(2)").innerText'
     );
-    const hoge = await page.evaluate(
-      'document.querySelector("#amd-area-button > ul > li:nth-child(3)").innerText'
+
+    const temp = await page.evaluate(
+      'document.querySelector("#amd-table > div > div:nth-child(2) > div > div.contents-wide-table-scroll > table > tr:nth-child(4) > td.td-temp").innerText'
+    );
+
+    const precipitationAmount = await page.evaluate(
+      'document.querySelector("#amd-table > div > div:nth-child(2) > div > div.contents-wide-table-scroll > table > tr:nth-child(4) > td.td-precipitation1h").innerText'
+    );
+
+    const wind = await page.evaluate(
+      'document.querySelector("#amd-table > div > div:nth-child(2) > div > div.contents-wide-table-scroll > table > tr:nth-child(4) > td.td-windDirection").innerText'
     );
 
     console.log('-----------');
     console.log(sano);
-    console.log(hoge);
-    console.log('日付:', date02);
+    console.log('日付:', date);
+    console.log('時間:', time);
+    console.log('気温:', temp);
+    console.log('降水量:', precipitationAmount);
+    console.log('風向:', wind);
     console.log('-----------');
 
     await browser.close();

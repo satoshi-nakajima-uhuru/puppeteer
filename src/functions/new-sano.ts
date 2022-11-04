@@ -7,7 +7,6 @@ export const newSano = async () => {
   try {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-
     await page.goto(WEATHER_URL, { waitUntil: 'networkidle2' });
 
     const date = await page.evaluate(() => {
