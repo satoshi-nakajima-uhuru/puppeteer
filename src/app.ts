@@ -7,5 +7,8 @@
 // import { sano } from './functions/sano';
 // sano();
 
-import { newSano } from './functions/new-sano';
-newSano();
+// import { newSano } from './functions/new-sano';
+// newSano();
+
+import { newSano02 } from './functions/new-sano02';
+newSano02();
