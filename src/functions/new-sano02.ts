@@ -29,9 +29,17 @@ export const newSano02 = async () => {
       'document.querySelector("#amd-table > div > div:nth-child(2) > div > div.contents-wide-table-scroll > table > tr:nth-child(4) > td.td-precipitation1h").innerText'
     );
 
-    const wind = await page.evaluate(
-      'document.querySelector("#amd-table > div > div:nth-child(2) > div > div.contents-wide-table-scroll > table > tr:nth-child(4) > td.td-windDirection").innerText'
-    );
+    const query =
+      'document.querySelector("#amd-table > div > div:nth-child(2) > div > div.contents-wide-table-scroll > table > tr:nth-child(4) > td.td-windDirection").innerText';
+
+    // const shortQuery =
+    //   '#amd-table > div > div:nth-child(2) > div > div.contents-wide-table-scroll > table > tr:nth-child(4) > td.td-windDirection';
+
+    const wind = await page.evaluate(query);
+
+    // const hoge = await page.evaluate(
+    //   `document.querySelector("${shortQuery}").innerText`
+    // );
 
     console.log('-----------');
     console.log(sano);
