@@ -10,8 +10,8 @@
 // import { newSano } from './functions/new-sano';
 // newSano();
 
-// import { newSano02 } from './functions/new-sano02';
-// newSano02();
+import { newSano02 } from './functions/new-sano02';
+newSano02();
 
-import { oldSano } from './functions/old-sano';
-oldSano();
+// import { oldSano } from './functions/old-sano';
+// oldSano();
