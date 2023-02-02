@@ -1,3 +1,6 @@
+import { stat } from "fs";
+import { ConsoleMessage } from "puppeteer";
+
 const puppeteer = require('puppeteer');
 
 const WEATHER_URL =
@@ -7,6 +10,10 @@ export const newSano02 = async () => {
   try {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
+    page.on("response", async response => {
+      const status = await response.status();
+      console.log(status);
+    });
     await page.goto(WEATHER_URL, { waitUntil: 'networkidle2' });
 
     const sano = await page.evaluate(
