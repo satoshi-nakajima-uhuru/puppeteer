@@ -10,8 +10,8 @@ export const newSano02 = async () => {
   try {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    page.on("response", async response => {
-      const status = await response.status();
+    page.on("response", response => {
+      const status = response.status();
       console.log(status);
     });
     await page.goto(WEATHER_URL, { waitUntil: 'networkidle2' });
